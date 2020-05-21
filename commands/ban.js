@@ -1,3 +1,4 @@
+const timeBan = require('./timeBan');
 const banStore = require('../store/ban');
 
 module.exports = {
@@ -19,6 +20,8 @@ module.exports = {
       msg.channel.send('Missing ban parameter');
       return;
     }
+
+    timeBan.stopTimer();
     
     const banned = args.join(' ');
     const user = msg.member.nickname || msg.member.user.username;
@@ -30,5 +33,7 @@ module.exports = {
     
     msg.channel.send(`${user} banned [${banned}]`);
     console.info(`${user} banned [${banned}]`);
+    
+    timeBan.resetAndStartTimer(msg);
   },
 };

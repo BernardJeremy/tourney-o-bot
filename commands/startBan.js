@@ -1,3 +1,4 @@
+const timeBan = require('./timeBan');
 const banStore = require('../store/ban');
 
 module.exports = {
@@ -22,5 +23,8 @@ module.exports = {
     
     console.info(`Ban phase starting now for ${banStore.state.banPhaseName}`);
     msg.channel.send(`Ban phase starting now for ${banStore.state.banPhaseName}`);
+
+    timeBan.resetAndStartTimer(msg);
+    timeBan.execute(msg, []);
   },
 };

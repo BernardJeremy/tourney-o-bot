@@ -1,3 +1,4 @@
+const timeBan = require('./timeBan');
 const banStore = require('../store/ban');
 
 module.exports = {
@@ -14,8 +15,10 @@ module.exports = {
       return;
     }
 
-    msg.channel.send(`Banlist for ${banStore.state.banPhaseName} :`);
-    console.info(`Banlist for ${banStore.state.banPhaseName} :`);
+    timeBan.stopTimer();
+    
+    msg.channel.send(`Ban list for ${banStore.state.banPhaseName} :`);
+    console.info(`Ban list for ${banStore.state.banPhaseName} :`);
     
     banStore.state.banList.forEach((banItem) => {
       msg.channel.send(`- ${banItem.banned} (by ${banItem.by})`);
